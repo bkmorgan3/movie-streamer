@@ -19,7 +19,8 @@ class App extends Component {
       movieDetail: {},
       verified: false,
       condition: 'home',
-      currentUser: ''
+      currentUser: '',
+      displaySearch: true,
     }
 
     this.getNowPlaying = this.getNowPlaying.bind(this);
@@ -27,6 +28,7 @@ class App extends Component {
     this.getMovieDetail = this.getMovieDetail.bind(this);
     this.submitLogin = this.submitLogin.bind(this);
     this.submitSignup = this.submitSignup.bind(this);
+    this.displaySearch = this.displaySearch.bind(this);
   }
 
   submitLogin(e) {
@@ -43,6 +45,10 @@ class App extends Component {
           });
         }
       })
+  }
+  displaySearch(){
+    console.log("display state", this.state)
+    this.setState({displaySearch: !this.state.displaySearch})
   }
 
   submitSignup(e) {
@@ -130,10 +136,10 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Nav />
+        <Nav displaySearch={this.displaySearch}/>
         <Switch>
           <Route exact path="/">
-            <SearchForm getSearchResult={this.getSearchResult}/>
+            <SearchForm getSearchResult={this.getSearchResult} />
             {
               this.state.condition === 'home' &&
               <NowPlaying 
@@ -154,6 +160,7 @@ class App extends Component {
                 movieDetail={this.state.movieDetail} 
               />
             }
+           
           </Route>
           <Route path="/login">
             <Login 

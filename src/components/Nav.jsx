@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
-export default function Nav() {
+export default function Nav(props) {
 
   return (
     <nav className="navbar">
       <h2>
-          <Link id="logo" onClick={()=>window.location.reload()} to="/">Movie On</Link>
+          <Link id="logo" onClick={props.displaySearch} to="/">Movie On</Link>
       </h2>
       <ul className="nav-ul">
         <li>
@@ -17,5 +17,5 @@ export default function Nav() {
         </li>
       </ul>
     </nav>
-   )
+   );
 }
