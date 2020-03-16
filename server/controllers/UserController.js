@@ -15,6 +15,7 @@ const createUser = (req, res, next) => {
       let queryForSignUp = `INSERT INTO Users (NAME, PASSWORD) VALUES ('${req.body.user}', '${req.body.pass}') ON CONFLICT (NAME) DO NOTHING`;
       pool.query(queryForSignUp, (err, result) => {
         if (err) return next({err: "Error creating user"});
+        console.log("leaving create user")
         return next();
       })
     })

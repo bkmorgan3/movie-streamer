@@ -14,12 +14,14 @@ const isLoggedIn = (req, res, next) => {
 };
 
 const startSession = (req, res, next) => {
+  console.log("inside start session")
   let cookie = uuidv4();
   const queryForCookie = `INSERT INTO Sessions (COOKIEID, USERID) VALUES ('${cookie}', '${req.body.user}') ON CONFLICT (USERID) DO UPDATE SET COOKIEID = '${cookie}'`;
   pool.query(queryForCookie, (err, result) => {
     if (err) return next(err);
     res.cookie('MSCookie', cookie, { httpOnly: true });
     res.locals.verified = 'verified';
+    console.log(res.locals.verified)
     return next();
   });
 };
